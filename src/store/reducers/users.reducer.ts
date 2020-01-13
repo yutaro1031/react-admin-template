@@ -1,9 +1,7 @@
 import { reducerWithInitialState } from "typescript-fsa-reducers";
 import { addAdmin, removeAdmin, getUsersAction } from "../actions/users.action";
-
 import { IUserState, IActionBase } from "../models/root.interface";
-// import { ADD_ADMIN, REMOVE_ADMIN } from "../actions/users.action";
-import { IUser } from "../models/user.interface";
+import { ADD_ADMIN, REMOVE_ADMIN } from "../actions/users.action";
 
 const initialState: IUserState = {
     users: [
