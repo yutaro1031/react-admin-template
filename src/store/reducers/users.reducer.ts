@@ -1,5 +1,5 @@
 import { reducerWithInitialState } from "typescript-fsa-reducers";
-import { addAdmin, removeAdmin } from "../actions/users.action";
+import { addAdmin, removeAdmin, getUsersAction } from "../actions/users.action";
 
 import { IUserState, IActionBase } from "../models/root.interface";
 // import { ADD_ADMIN, REMOVE_ADMIN } from "../actions/users.action";
@@ -25,6 +25,13 @@ export const userReducer = reducerWithInitialState(initialState)
         ...state,
         users: [...state.users, payload],
         admins: state.admins.filter(x => x.id !== payload.id)
+    }))
+    .case(getUsersAction.started, state => ({ ...state }))
+    .case(getUsersAction.failed, state => ({ ...state }))
+    .case(getUsersAction.done, (state, payload) => ({
+        ...state,
+        users: [...state.users, ...payload.result.users],
+        admins: [...state.admins]
     }))
 
 // function userReducer(state: IUserState = initialState, action: IActionBase): IUserState {
